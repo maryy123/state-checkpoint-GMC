@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Person from "./Person";
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false,
+    };
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  handleButton = () => {
+    this.setState({ show: !this.state.show });
+  };
+
+  render() {
+    console.log("renderParent()");
+    return (
+      <div className="App">
+        <header className="App-header">
+          <button onClick={this.handleButton}>
+            {this.state.show ? "Hide" : "Show"}
+          </button>
+          {this.state.show ? (
+            <>{this.state.show && <Person />}</>
+          ) : (
+            <h3 style={{ color: "black" }}>
+              Click the button to display portfolio
+            </h3>
+          )}
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
